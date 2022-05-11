@@ -1,0 +1,16 @@
+ #This playbook will automate a task to check apache version as well as the status of apache instances.
+ #All server(s) or server groups defined in the hosts file will be verified.
+ 
+ - name: Playbook
+    hosts: webservers
+    become: yes
+    become_user: root
+    tasks:
+      - name: ensure apache is at the latest version
+        yum:
+          name: httpd
+          state: latest
+      - name: ensure apache is running
+        service:
+          name: httpd
+          state: started
